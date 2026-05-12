@@ -135,10 +135,6 @@ textarea {
 # =========================
 # LOAD NLTK
 # =========================
-try:
-    nltk.data.find("tokenizers/punkt")
-except LookupError:
-    nltk.download("punkt")
 
 try:
     nltk.data.find("corpora/stopwords")
@@ -176,7 +172,7 @@ def clean_text(text):
     text = re.sub(r"[^a-z\s]", " ", text)
     text = re.sub(r"\s+", " ", text).strip()
 
-    words = nltk.word_tokenize(text)
+    words = text.split()
     words = [word for word in words if word not in stop_words and len(word) > 2]
     words = [stemmer.stem(word) for word in words]
 
